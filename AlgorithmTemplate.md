@@ -146,4 +146,14 @@ void BFS(Node* node)
     }
   }
 }
+
+void BFS_DRIVER(unordered_map<int, Node*> graph)
+{
+  for(auto it = graph.begin() ; it != graph.end() ;++it)
+  {
+    Node* tmp = it->second() ;
+    if(tmp->visited != 1)
+      BFS(tmp)
+  }
+}
 ```
