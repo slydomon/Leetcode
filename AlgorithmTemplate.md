@@ -4,6 +4,7 @@
 
 ### preorder
 
+```
 void preorder(TreeNode* root)
 {
   stack<TreeNode*> s ;
@@ -18,6 +19,7 @@ void preorder(TreeNode* root)
       s.push(children[i]) ;
   }
 }
+```
 
 ### inorder
 
