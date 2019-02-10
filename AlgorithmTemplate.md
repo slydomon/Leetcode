@@ -220,4 +220,46 @@ void BFS_Topological_Sort(unordered_map<int, Node*> graph)
 1. Print the node from the leaf-like node, so the ordered is reversed.
 2. We can save it in a stack and print it out at the end.
 
-v
+```
+void DFS_Topological_Sort(Node* node, stack<Node*>& record)
+{
+  node->visited = 1 ;
+  int size = node->children->size() ;
+  for(int i = 0 ; i < size ; ++i)
+  {
+    if(node->children[i]->visited != 1)
+      DFS_Topological_Sort(node->children[i]) ;
+    else if(cycle == 0) //visited == 1 && cycle == 0
+    {
+      cout << "detect cycle" endl ;
+      abort() ;
+    }
+  }
+  record.push(node) ;
+  node->cycle = 1 ;
+}
+
+void DFS_DRIVER(unordered_map<int, Node*> graph)
+{
+  stack<Node*> record ;
+  for(auto it = graph.begin() ; it != graph.end() ; ++it)
+  {
+    Node* cur = it->second ;
+    if(cur->visited != 1)
+      DFS_Topological_Sort(cur, record) ;
+    else if(cur->cycle == 0) //visited == 1 && cycle == 0
+    {
+      cout << "detect cycle" endl ;
+      abort() ;
+    }
+  }
+  
+  while(!record.empty())
+  {
+    Node* tmp = record.top() ;
+    record.pop() ;
+    //do something here ;
+  }
+  return ;
+}
+```
