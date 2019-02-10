@@ -1,4 +1,4 @@
-# Algorithm Template
+# Algorithm Template-Traversal
 
 ## Iterative Tree Traversal
 
@@ -159,3 +159,65 @@ void BFS_DRIVER(unordered_map<int, Node*> graph)
   }
 }
 ```
+
+## Topological Sort
+Need cycle detection to vaildate the acyclic property
+
+### BFS
+1. Calculate the indegree.
+2. Start with node with 0 indegree.
+3. When visiting a node, eliminate the node from graph and minus the indegree value of all its children.
+
+void BFS_Topological_Sort(unordered_map<int, Node*> graph)
+{
+  //Calculate indegree
+  for(auto it = graph.begin() ; it != graph.end() ; ++it)
+  {
+    Node* cur = it->second ;
+    int size = cur->children.size() ;
+    for(int i = 0 ; i < size ; ++i)
+    {
+      ++children[i]->indegree ;
+    }
+  }
+  
+  //add node with 0 indegree to ready queue, others with be in pending set
+  queue<Node*> ready ; //node with 0 indgree ;
+  unordered_set<int> pending ;
+  for(auto it = graph.begin() ; it != graph.end() ; ++it)
+  {
+    if(it->second->indegree == 0)
+      ready.puhs(it->second) ;
+    else
+      pending.insert(it->first) ;
+  }
+  
+  while(!ready.empty())
+  {
+    Node* cur = ready.front() ;
+    ready.pop() ;
+    //do something here ;
+    int size = cur->children.size() ;
+    for(int i = 0 ; i < size ; ++i)
+    {
+      --children[i]->indegree ;
+      if(children[i]->indegree == 0)
+      {
+        pending.erase(children[i].value) ;
+        ready.push(children[i]) ;
+      }
+    }
+    
+    if(ready.empty() && !pending.empty())
+    {
+      cout << "cycle detected" << endl; 
+      abort() ;
+    }
+  }
+}
+
+### DFS
+1. Print the node from the leaf-like node, so the ordered is reversed.
+2. We can save it in a stack and print it out at the end.
+
+v
