@@ -15,7 +15,7 @@ void preorder(TreeNode* root)
     s.pop() ;
     //do something here ...
     int size = tmp->children.size() ;
-    for(int i = 0 ; i < size ; ++i)
+    for(int i = size-1 ; i >= 0 ; ++i)
       s.push(children[i]) ;
   }
 }
