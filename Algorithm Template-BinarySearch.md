@@ -19,6 +19,6 @@ int binary_search(int left, int right, int target, vector<int> range)
     else left = mid + 1 ;
   }
   
-  return (range[left] == target)? range[left]:-1; 
+  return (range[left] == target)? left:-1; 
 }
 ```
