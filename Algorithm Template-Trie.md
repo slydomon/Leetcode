@@ -8,12 +8,6 @@
 
 ## Code
 ```
-struct node
-{
-  char val ; // val = "", if it is dummy head. 
-  bool end ;
-  vector<node*> children(26, nullptr) ;
-}
 class trie
 {
   trie()
@@ -61,6 +55,22 @@ class trie
   }
   
   private:
+    struct node
+    {
+      node():end(false), children(vector<node*>(26,nullptr);
+      ~node()
+      {
+        for(int i = 0 ; i < 26 ; ++i)
+        {
+          if(children[i])
+            delete children[i] ;
+        }
+      }
+      char val ; // val = "", if it is dummy head. 
+      bool end ;
+      vector<node*> children(26, nullptr) ;
+    }
+    
     node* root ;
 }
 ```
