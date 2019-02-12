@@ -11,13 +11,14 @@ result in searching for left part, so as the else part.
 ```
 int binary_search(int left, int right, int target, vector<int> range)
 {
-  while(l < r)
+  while(left < right)
   {
-    int m = l + (r-l) / 2 ;
-    if (target == range[m] ) return m ;
-    if (target < range[m]) r = m ;
-    else l = m + 1 ;
+    int mid = left + (right - left) / 2 ;
+    if (target == range[mid] ) return mid ;
+    if (target < range[mid]) r = mid ;
+    else left = mid + 1 ;
   }
-  return -1; //no such answer.
+  
+  return (range[left] == target)? range[left]:-1; 
 }
 ```
