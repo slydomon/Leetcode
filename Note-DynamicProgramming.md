@@ -25,9 +25,9 @@ Dependecy for next state: O(1) -> lookup table size: O(n)
 Classic problem: Leetcode 70, 198
 ```
 #### Code Template:
-```
-Memoization:
 
+##### Memoization
+```
 //use level-1 as input
 int recursize(int level, vector<int>& lookup)
 {
@@ -42,7 +42,10 @@ int recursize(int level, vector<int>& lookup)
     return tmp ;
   }
 }
+```
 
+##### Dynamic Programming
+```
 int iterative(int level, vector<int>& dp)
 {
   dp[0] = n ; // add padding
