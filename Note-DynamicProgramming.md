@@ -111,6 +111,7 @@ Buttom-up: The next state relys on all the previous states.
 
 #### Code Template
 
+##### Memoization
 ```
 ****
 //Use input.size() as input for range;
@@ -139,7 +140,10 @@ int recur(const vector<int>& input, range, vector<int>& lookup)
     return tmp ;
   }
 }
+```
 
+##### Dynamic Programming
+```
 int iterative(const vector<int>& input, range, vector<int>& dp)
 {
   dp[0] = n ; //padding with n ;
