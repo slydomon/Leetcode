@@ -127,13 +127,13 @@ int recur(const vector<int>& input, range, vector<int>& lookup)
   else
   {
     int tmp = 0 ;
-    int start = input.size() - range ;
-    int end = start + range ;
-    //CUT L/ EET -> LE/ET -> LEE/T -> LEET/
-    for(int cut_pos = start ; cut_pos <= end ; ++cut_pos)
+    int end = input.size() ;
+    int start = end - range ;
+    //CUT /LEET -> L/EET -> LE/ET -> LEE/T
+    for(int cut_pos = start ; cut_pos < end ; ++cut_pos)
     {
       int subproblem_size = cut_pos - start ;
-      int rest = end-i ;
+      int rest = end - cut_pos ;
       tmp = func(recursive(input, subproblem_size, lookup), Const(rest)) ;
     }
     lookup[range] = tmp ;
