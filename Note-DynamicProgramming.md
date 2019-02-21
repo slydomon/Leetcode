@@ -101,7 +101,7 @@ public:
 ```
 Input size: O(n)
 Dependecy for next state: O(n) -> lookup table size: O(n*n)
-Classic problem: Leetcode 139(wordbreak), 300(longest increasing subsequence)
+Classic problem: Leetcode 139(wordbreak), 300(longest increasing subsequence), 673(nums of longest increasing subsequence)
 ```
 
 #### Allegator Pacman Type
