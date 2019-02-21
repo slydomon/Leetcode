@@ -168,6 +168,7 @@ Need cycle detection to vaildate the acyclic property
 2. Start with node with 0 indegree.
 3. When visiting a node, eliminate the node from graph and minus the indegree value of all its children.
 
+```
 void BFS_Topological_Sort(unordered_map<int, Node*> graph)
 {
   //Calculate indegree
@@ -215,6 +216,7 @@ void BFS_Topological_Sort(unordered_map<int, Node*> graph)
     }
   }
 }
+```
 
 ### DFS
 1. Print the node from the leaf-like node, so the ordered is reversed.
