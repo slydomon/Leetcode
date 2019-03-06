@@ -15,7 +15,7 @@ int binary_search(int left, int right, int target, vector<int> range)
   {
     int mid = left + (right - left) / 2 ;
     if (target == range[mid] ) return mid ;
-    if (target < range[mid]) r = mid ;
+    if (target <= range[mid]) r = mid ;
     else left = mid + 1 ;
   }
   
