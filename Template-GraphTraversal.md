@@ -127,17 +127,21 @@ void BFS(Node* node)
   queue<Node*> cur ;
   queue<Node*> next ;
   cur.push(node) ;
+  node->visited = 1 ; //mark at here is important ;
   while(!cur.empty())
   {
     Node* tmp = cur.top() ;
-    tmp->visited = 1 ;
+    //tmp->visited = 1 ; ***mark the visited as soon as the node is put into ready queue to avoid duplicate put.
     tmp->level = level ;
     cur.pop() ;
     int size = tmp->children->size() ;
     for(int i = 0 ; i < size ; ++i)
     {
       if(children[i]->visited != 1)
+      {
         next.push(children[i]) ;
+        children[i]->visited = 1 ;
+      }
       else if(children[i]->level < cur->level)
         cout << "cycle" << endl ;
     }
