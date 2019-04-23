@@ -69,7 +69,7 @@ public:
         }
         if(count == 1) 
         {
-          cur.~node() ; //no other children and safely destruct the node and will recursively destruct.
+          cur.~Node() ; //no other children and safely destruct the node and will recursively destruct.
           return ;
         }
       }
@@ -79,7 +79,7 @@ public:
         if(c != nullptr)
           if(++count > 1) return ;
       }
-      cur.~node() ;
+      cur.~Node() ;
     }
     
 
