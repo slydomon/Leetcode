@@ -8,69 +8,93 @@
 
 ## Code
 ```
-class trie
-{
-  trie()
-  {
-    root = new node() ; // dummy head
-  }
-  
-  ~trie() //prevent memory leak
-  {
-    for(int i = 0 ; i < 26 ; ++i){
-      if(children[i])
-        delete children[i] ;
-    }
-  }
-  
-  void insert(string s)
-  {
-    int size = s.size() ;
-    node* cur = root ;
-    for(int i = 0 ; i < size ; ++i)
-    {
-      if(!cur->children[s[i] - 'a']) //the node does not exist.
-      {
-        cur->children[s[i] - 'a'] = new node() ;
-        cur->val = s[i] ;
-      }
-      else
-        cur = cur->children[s[i] - 'a'] ;
-    }
-    cur->end = true ; //there is a word end here
-  }
-  
-  bool search(string s)
-  {
-    int size = s.size() ;
-    node* cur = root ;
-    for(int i = 0 ; i < size ; ++i)
-    {
-      if(cur->children[s[i] - 'a'] == nullptr) 
-        return false;
-      else
-        cur = cur->children[s[i] - 'a'] ;
-    }
-    return cur->end ; //if true, there is a word end here .
-  }
-  
-  private:
-    struct node
-    {
-      node():end(false), children(vector<node*>(26,nullptr);
-      ~node()
-      {
-        for(int i = 0 ; i < 26 ; ++i)
-        {
-          if(children[i])
-            delete children[i] ;
-        }
-      }
-      char val ; // val = "", if it is dummy head. 
-      bool end ;
-      vector<node*> children(26, nullptr) ;
+class Trie {
+public:
+    /** Initialize your data structure here. */
+    Trie() {
+        root.reset(new Node) ;
+        root->tail = true ;
     }
     
-    node* root ;
-}
+    /** Inserts a word into the trie. */
+    void insert(string_view word) {
+        Node* cur = root.get() ;
+        for(const auto& c : word)
+        {
+            if(cur->children[c - 'a'].get() == nullptr)
+                cur->children[c - 'a'].reset(new Node) ; 
+            cur = cur->children[c - 'a'].get() ; 
+        }
+        cur->tail = true ;
+    }
+    
+    /** Returns if the word is in the trie. */
+    bool search(string_view word) {
+        Node* cur = root.get() ;
+        for(const auto& c: word)
+        {
+            if(cur->children[c - 'a'].get() == nullptr)
+                return false ;
+            cur = cur->children[c - 'a'].get() ; 
+        }
+        return cur->tail ;
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    bool startsWith(string_view prefix) {
+        Node* cur = root.get() ;
+        for(const auto& c: prefix)
+        {
+            if(cur->children[c - 'a'].get() == nullptr)
+                return false ;
+             cur = cur->children[c - 'a'].get() ; 
+        }
+        return true ;
+    }
+    
+    void delete(string_view s)
+    {
+      Node* cur = root.get() ;
+      int count = 0 ;
+      for(const auto& c: s)
+      {
+        count = 0 ;
+        cur = cur->children[c - 'a'] ;
+        for(c : cur->children)
+        {
+          if(c != nullptr)
+          { 
+            if(++count > 1) break ;
+          }
+        }
+        if(count == 1) 
+        {
+          cur.~node() ; //no other children and safely destruct the node and will recursively destruct.
+          return ;
+        }
+      }
+      cur->tail = false ;
+      for(c : cur->children)
+      {
+        if(c != nullptr)
+          if(++count > 1) return ;
+      }
+      cur.~node() ;
+    }
+    
+
+private:    
+    struct Node
+    {
+        Node()
+        {
+            //children.reserve(26) ;
+           // for(int i = 0 ; i < 26 ; ++i)
+                //children.emplace_back(nullptr) ;
+        }
+        bool tail = false ;
+        array<unique_ptr<Node>, 26> children ;
+    } ;
+    unique_ptr<Node> root ;
+};
 ```
