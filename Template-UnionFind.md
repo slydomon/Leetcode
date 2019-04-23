@@ -30,8 +30,16 @@ class union_find
   {
     int pa = find(a) ;
     int pb = find(b) ;
-    if(rank[pa] > rank[pb]) parent[pb] = parent[pa] ;
-    else parent[pa] = parent[pb] ;
+    if(rank[pa] > rank[pb]) 
+    {
+      parent[pb] = parent[pa] ;
+      rank[pa] += rank[pb] ; //contribute rank to root
+    }
+    else
+    {
+      parent[pa] = parent[pb] ;
+      rank[pb] += rank[pa] ; //contribute rank to root
+    }
     return ;
   }
   
