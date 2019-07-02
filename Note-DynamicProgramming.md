@@ -100,7 +100,7 @@ public:
 
 ```
 Input size: O(n)
-Dependecy for next state: O(n) -> lookup table size: O(n*n)
+Dependecy for next state: O(n) -> lookup table size: O(n)
 Classic problem: Leetcode 139(wordbreak), 300(longest increasing subsequence), 673(nums of longest increasing subsequence)
 ```
 
