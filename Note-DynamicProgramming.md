@@ -170,11 +170,8 @@ Note:
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
-        unordered_set<string_view> dict ;
-        for(auto&& word: wordDict)
-        {
-            dict.insert(string_view(word)) ;
-        }
+        using vec_it = std::vector<string>::iterator ;
+        unordered_set<string_view> dict (move_iterator<vec_it>(begin(wordDict)), move_iterator<vec_it>(end(wordDict))) ;
         size = s.size() ;
         vector<int> lookup(size, -1) ;
         return helper(0, dict, string_view(s), lookup) ;       
