@@ -78,7 +78,7 @@ void postorder(TreeNode* root)
 
 ### Morris Traversal preorder (space complexity = O(1) )
 
-```print, build bridge, visited again thruogh bridge, destruct bridge```
+```print, build bridge, traverse, visited again thruogh bridge, destruct bridge```
 
 ```
 while(root)
@@ -111,7 +111,36 @@ while(root)
   }
 }
 ```
+### Morris Traversal inorder.
 
+```traverse, print,  build bridge, visited again, distruct```
+
+```
+while(root)
+{
+  if(!root->left)
+  {
+    cout << root->data ;
+    root->right ;
+  }
+  else
+  {
+    node* current = root->left ;
+    while(current->right && current->right != root) current = current -> right ;
+    
+    if(current == root)
+    {
+      cout << root->data ;
+      current->right = null ;
+      root = root->right ;
+    }
+    else
+    {
+      root->left ;
+    }
+  }
+}
+```
 
 ## Graph Traversal
 
