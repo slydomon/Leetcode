@@ -167,49 +167,46 @@ Note:
 2. For top-down, we divide the problem into a O(1) subproblem and a O(n-1) subproblem, and keep doing so until the O(n-1)        becomes hit the base case(n = 0)
 3. For buttom-up, we construct the solution from dp[0] = 0 (n=0), which is the smallest subproblem in momoization solution.
 
-
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
-        int size = wordDict.size() ;
-        unordered_set<string> dict ;
-        //vector<int> lookup(s.size(), -1) ;
-        for(int i = 0 ; i < size ; ++i) dict.insert(wordDict[i]) ;
-        //return helper(s, dict, 0, lookup) ;
-        
-        vector<int> lookup(s.size()+1, 0) ;
-        return helper_iterative(s, dict, lookup) ;
-    }
-    bool helper(string segment, const unordered_set<string>& dict, int start, vector<int>& lookup)
-    {
-        int size = segment.size() ;
-        if(dict.find(segment.substr(start, size-start)) != dict.end())
-            return true ;
-        if(size - start == 1) size-start
-            return false;
-        else if(lookup[start] != -1) 
+        unordered_set<string_view> dict ;
+        for(auto&& word: wordDict)
         {
-            return lookup[start] ;
+            dict.insert(string_view(word)) ;
         }
-        else
-        {
-            bool tmp = false ;
-            for(int i = 1 ; i < size-start ; ++i)
-            {
-                string select = segment.substr(start, i) ;
-                if(dict.find(select) != dict.end()
-                  && helper(segment, dict, start+i, lookup) )
-                {
-                        lookup[start] = tmp ;
-                        tmp = true ;
-                        return tmp ;
-                }     
-            }
-            lookup[start] = tmp ;
-            return tmp ;
-        }
+        size = s.size() ;
+        vector<int> lookup(size, -1) ;
+        return helper(0, dict, string_view(s), lookup) ;       
     }
     
+    bool helper(int idx, const unordered_set<string_view>& dict, string_view cur, vector<int>& lookup)
+    {
+        if(idx == size) 
+            return true ;
+        else if(lookup[idx] != -1)
+            return lookup[idx] ;
+        else
+        {
+            for(int i = idx ; i < size ; ++i)
+            {
+                if(dict.find(cur.substr(idx, i - idx + 1)) != dict.end()
+                  && helper(i+1, dict, cur, lookup))
+                {
+                    lookup[idx] = 1 ;
+                    return true ;
+                }
+            }
+            lookup[idx] = 0 ;
+            return false ;
+        }
+    }
+ private:   
+    int size ;
+ };  
+
+class Solution {
+public:
     bool helper_iterative(const string& segment, const unordered_set<string>& dict, vector<int>& dp)
     {
         dp[0] = true ; //empty is valid although it is not in dict .
