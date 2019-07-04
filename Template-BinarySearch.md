@@ -19,6 +19,11 @@ int binary_search(int left, int right, int target, vector<int> range)
     else left = mid + 1 ;
   }
   
-  return (range[left] == target)? left:-1; 
+  return (range[left] == target)? left:-1; //for search only one value;
+  
+  //for range search
+  if( predicate(max(left + 1, size) ) return left + 1 ;
+  else if(predicate(left) ) return left ;
+  else return max(left-1, 0) ;
 }
 ```
