@@ -41,7 +41,7 @@ class FenwickTree
     return sum ;
   }
 private:
-  inline in lowbit(int x) {return x &(-x);}
+  inline int lowbit(int x) const noexcept {return x &(-x);}
   vector<int> sums_;
 }
 ```
