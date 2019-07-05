@@ -22,6 +22,7 @@ class FenwickTree
 {
   FenwickTree(int n): sum_(vector<int>(n+1, 0)) {}
   
+  //delta = update_val - original_val;
   void update(int i, int delta)
   {
     while(i < sum.size())
