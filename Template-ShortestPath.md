@@ -55,16 +55,17 @@ vector<int> Dijkstra(vector<vector<int> > graph, int k)
     u = current.second  ;
     if(!visited[u])
     {
+      //include the new node into the group and take it into account to update dist.
       for(auto& to: g[u])
       {
         v = to.first, weight = t.second ;
         if(dist[v] > dist[u] + weight)
         {
           dist[v] = dist[u] + w ;
-          pq.push(make_pair(dist[v], v)) ;
+          pq.push(make_pair(dist[v], v)) ; //if dist is update, push new infomation into pq.
         }
       }
-      visited[u] = true ;
+      visited[u] = true ; //mark u as member in group(visited) ;
     }
     
   }
@@ -81,22 +82,5 @@ Input adjacent list.
 
 
 ```
-return k-to-all shortest path;
 
-vector<int> bellman_ford(vector<vector<int> > graph, int k)
-{
-  constexpr int MAX_DIST = int_max ;
-  vector<int> dist(num_of_node, MAX_DIST) ;
-  dist[k] = 0 ;
-  for(int i = 1 ; i < N ; ++i)
-  {
-    for(const auto& edge: graph)
-    {
-      int start = edge[0], end = edge[1], weight = edge[2] ;
-      dist[v] = min(dist[v], dist[start] + weight) ;
-    }
-  }
-}
-
-return dist ;
 ```
