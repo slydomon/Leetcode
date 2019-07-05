@@ -5,25 +5,25 @@
 2. The largest element in the right subtree cannot be less than its acenstor.
 
 ## Code of Binary Search.
-The "if(target < range[m])" part can be modified to any other conditions that 
-result in searching for left part, so as the else part and the last (range[left] == target)? left:-1
+```Do not use binary search to find the answer directly. Binary search return a critical point such that [critical point, end) fulfill the predicate.```
+```Base on the assumption above, we can use the critical point to resolve the problem.```
+```When using the critical point to solve the problem, consider the range.```
 
 ```
-int binary_search(int left, int right, int target, vector<int> range)
+int binary_search(int target, vector<int> range)
 {
+  int left = 0 ;
+  int right = range.size() ; //important***
   while(left < right)
   {
     int mid = left + (right - left) / 2 ;
-    if (target == range[mid] ) return mid ;
-    if (target < range[mid]) r = mid ;
+    if (target == range[mid] ) return mid ; //optional***
+    if (target < range[mid]) r = mid ; //all element [mid, end) (not include end) fulfill the predicate.
     else left = mid + 1 ;
   }
   
-  return (range[left] == target)? left:-1; //for search only one value;
-  
-  //for range search
-  if( predicate(max(left + 1, size) ) return left + 1 ;
-  else if(predicate(left) ) return left ;
-  else return max(left-1, 0) ;
+  //may be do some range check for l, when using it.
+  if(l == range.size() ) return -1(not found) ;
+  else return l ;
 }
 ```
