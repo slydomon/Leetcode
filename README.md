@@ -1,2 +1,2 @@
 # Leetcode
-Algorithm template and implementation
+Algorithm template and implementation.
