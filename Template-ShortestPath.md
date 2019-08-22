@@ -33,6 +33,7 @@ Input adjacent list.
 ```
 vector<int> Dijkstra(vector<vector<int> > graph, int k)
 {
+  //convert graph to adjacent list
   vector<pair<int, int> > g ;
   for(int i = 0 ; i < graph.size() ++i)
   {
@@ -41,27 +42,30 @@ vector<int> Dijkstra(vector<vector<int> > graph, int k)
       g[i] = make_pair(j, graph[i][j] ;
     }
   }
+  
+  //initialize required data structure.
   constexpr int MAX_DIST = INT_MAX ;
   vector<int> dist(num_of_node + 1, MAX_DIST) ;
   vector<int> visited(num_of_node+ 1, false) ;
   dist[k] = 0 ;
-  priority_queue<pair<int, int>, vector<pair<int, int>, std::greater<pair<int, int> > pq ;
+  priority_queue<pair<int, int>, vector<pair<int, int> >, std::greater<pair<int, int> > pq ; //pair: dist/node
   pq.push(make_pair(0, k)) ;
   int u, v, weight ;
+  
   while(!pq.empty())
   {
     auto current = pq.top() ; 
     pq.pop() ;
-    u = current.second  ;
-    if(!visited[u])
+    cur = current.second  ;
+    if(!visited[cur])
     {
       //include the new node into the group and take it into account to update dist.
-      for(auto& to: g[u])
+      for(auto& to: g[cur])
       {
-        v = to.first, weight = t.second ;
+        v = to.first, weight = to.second ;
         if(dist[v] > dist[u] + weight)
         {
-          dist[v] = dist[u] + w ;
+          dist[v] = dist[u] + weight ;
           pq.push(make_pair(dist[v], v)) ; //if dist is update, push new infomation into pq.
         }
       }
